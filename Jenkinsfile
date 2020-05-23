@@ -1,4 +1,11 @@
-def mvn_version = 'tool name: 'maven', type: 'maven' '
-withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
-  //sh "mvn clean package"
+node{
+  stage('SCM Checkout'){
+    git 'https://github.com/sullururamesh/genkinsbuild'
+  }
+  echo 'Ramesh'
+  stage('Compile-Package')
+  {
+   def mavenHome=tool name: 'maven', type: 'maven'
+    sh "${mavenHome}/bin/mvn package"
+  }
 }
